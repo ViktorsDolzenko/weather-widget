@@ -100,7 +100,7 @@ export const Weather = () => {
             {foreCast &&
             foreCast.map((weather: any) => {
               return (
-                  <CSSTransition classNames="leftSlide" appear={true} timeout={400} key={weather.ts}>
+                  <CSSTransition classNames="leftSlide" appear={true} timeout={400} in={true} key={weather.ts}>
                   <div className="forecast">
                     <div className="forecast-date">
                       {moment(weather.ts * 1000).format("dddd")}
