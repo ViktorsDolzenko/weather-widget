@@ -20,6 +20,11 @@
     height: 300px;
     background-image: url("./images/gta5town.jpg");
     border-radius: 31px;
+    margin: 0 auto;
+
+  @media (max-width: 840px) {
+    width: 300px;
+  }
 }
 
 .gradient {
@@ -47,6 +52,8 @@
     margin-top: 20px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .forecast {
@@ -58,9 +65,12 @@
     height: 100px;
     background-color: #b3cdd1;
     background-image: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
-    margin-left: 20px;
     border-radius: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
 }
+
 
 .forecast-icon {
     width: 52px;
@@ -92,6 +102,20 @@ form {
               color: white;
           }
       }
+  }
+
+  .input_button {
+    border: none;
+    outline: 0;
+    padding: 8px;
+    border-radius: 20px;
+    margin-left: 5px;
+    transition: 0.3s linear;
+
+    &:hover {
+      background: mediumpurple;
+      color: white;
+    }
   }
 
   .city-label {

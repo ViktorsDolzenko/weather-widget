@@ -21,7 +21,7 @@ export const Weather = () => {
   };
 
   const getForecast = async (query: string) => {
-    const response = await axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?&city=${query ? query : ""}&key=${KEY}&days=5`)
+    const response = await axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?&city=${query ? query : ""}&key=${KEY}&days=6`)
     setForeCast(response.data.data);
     if(foreCast === undefined) return
    foreCast.shift();
@@ -73,7 +73,7 @@ export const Weather = () => {
         />
         <label className={query.length !== 0 ? "move-up" : "city-label"} htmlFor="city">Your City</label>
         </div>
-          <button type="submit">Search</button>
+          <button className="input_button" type="submit">Search</button>
       </form>
         <div className="weather-wrapper">
           { currentWeatherData &&
