@@ -1,0 +1,298 @@
+$bodyBg: #333;
+$yellow: #e5d8ba;
+$blue: #bae2e0;
+$cloudWhite: #dad9d9;
+
+.svg-contain {
+  max-width: 150px;
+  margin: 20px;
+  width: 100%;
+}
+
+.weather-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.big-path,
+.lightening,
+.line,
+.little-path {
+  stroke-miterlimit: 10;
+  stroke-width: 2;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.cloud {
+  fill: $cloudWhite;
+}
+
+.little-path {
+  stroke-width: 1;
+}
+
+.hurricane-svg {
+  $lines: 12;
+  .line {
+    stroke: $blue;
+    opacity: 1;
+    animation: fadeIn 0.8s ease-in alternate-reverse infinite;
+    @for $i from 1 through $lines {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.1s;
+      }
+    }
+  }
+  .lightening {
+    animation: flash 1s infinite;
+    stroke: $yellow;
+  }
+  .big-path,
+  .little-path {
+    stroke: $blue;
+  }
+  .big-path {
+    stroke-width: 1;
+  }
+  .little-path {
+    stroke-width: 0.5;
+  }
+  .cloud {
+    animation: colorChange 1s infinite;
+  }
+}
+
+.windy-svg {
+  .little-path,
+  .big-path {
+    animation: dash 1s ease-in alternate-reverse infinite,
+      fadeIn 1s alternate-reverse infinite;
+  }
+  path {
+    stroke: $blue;
+  }
+  .path-1 {
+    stroke-dasharray: 7;
+    stroke-dashoffset: 7;
+  }
+  .path-2 {
+    stroke-dasharray: 25;
+    stroke-dashoffset: -25;
+  }
+  .path-3 {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+  }
+  .path-4 {
+    stroke-dasharray: 8;
+    stroke-dashoffset: 8;
+  }
+  .path-5 {
+    stroke-dasharray: 22;
+    stroke-dashoffset: -22;
+  }
+  .big-path-1 {
+    stroke-dasharray: 57;
+    stroke-dashoffset: 57;
+  }
+  .big-path-2 {
+    stroke-dasharray: 76;
+    stroke-dashoffset: 76;
+  }
+}
+
+.clear-sky-svg {
+  animation: expand 0.8s alternate-reverse infinite;
+  .sun {
+    fill: $yellow;
+  }
+  .line {
+    stroke: $yellow;
+    stroke-dasharray: 7;
+    animation: dash 0.8s alternate-reverse infinite, fadeIn 1s forwards;
+  }
+  .line-1,
+  .line-3,
+  .line-5,
+  .line-7,
+  .line-4 {
+    stroke-dashoffset: 5;
+    animation-delay: 0.3s;
+  }
+  .line-2,
+  .line-6,
+  .line-8 {
+    stroke-dashoffset: -5;
+  }
+}
+
+.overcast-clouds {
+  .cloud-still {
+    fill: $cloudWhite;
+    animation: bounce 4s ease-in-out alternate-reverse infinite;
+    &:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+  }
+}
+
+.snow-svg {
+  .snowflake {
+    transform-origin: 50% 50%;
+    transform: translateY(-10px);
+    opacity: 0;
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        @if $i % 2==0 {
+          animation: fall-clockwise
+            random(2000) +
+            2000ms
+            ease-in
+            forwards
+            infinite;
+          animation-delay: $i * 0.1s * random(3);
+        } @else {
+          animation: fall-counterclockwise
+            random(2000) +
+            2000ms
+            ease-in
+            forwards
+            infinite;
+          animation-delay: $i * 0.1s * random(3);
+        }
+      }
+    }
+  }
+  .snowflake-path {
+    stroke: $blue;
+    stroke-width: 1;
+  }
+}
+
+.fog-svg {
+  .fog-line {
+    @for $i from 1 through 18 {
+      &:nth-child(#{$i}) {
+        stroke: $blue;
+        animation: pan 10s ease-in-out forwards infinite,
+          fadeIn 4s alternate-reverse infinite;
+        animation-delay: $i * 0.2s;
+      }
+    }
+  }
+}
+
+@keyframes colorChange {
+  0%,
+  90% {
+    fill: rgba(100, 100, 120, 1);
+  }
+  60%,
+  100% {
+    fill: rgba(200, 200, 200, 0.8);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flash {
+  0%,
+  90% {
+    opacity: 0;
+    transform: translateX(-1px) translateY(-2px) rotate(0.01deg);
+  }
+  90% {
+    transform: translateX(1px) translateY(-1px);
+  }
+  60%,
+  100% {
+    opacity: 1;
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+@keyframes expand {
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0.1deg);
+  }
+  30%,
+  80% {
+    transform: translateY(3px) translateX(3px) rotate(0.1deg);
+  }
+}
+
+@keyframes fall-clockwise {
+  0% {
+    transform: translateY(-7px) rotate(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(-4px) translateX(4px) rotate(-30deg) scale(0.7);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(5px) translateX(0px) rotate(30deg) scale(0.6);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px) translateX(3px) scale(0.5);
+  }
+}
+
+@keyframes fall-counterclockwise {
+  0% {
+    transform: translateY(-9px) rotate(0) scale(0.6);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(-4px) translateX(-4px) rotate(30deg) scale(0.7);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(8px) translateX(4px) rotate(-30deg) scale(0.8);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(14px) translateX(-3px) scale(0.7);
+  }
+}
+
+@keyframes pan {
+  0%,
+  100% {
+    transform: translateX(-2px) rotate(0.01deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(0.01deg);
+  }
+}
