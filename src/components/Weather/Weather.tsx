@@ -25,6 +25,7 @@ export const Weather = () => {
     setForeCast(response.data.data);
     if(foreCast === undefined) return
    foreCast.shift();
+    setLoading(false)
   };
 
   const handleCityChange = (e: any) => {
@@ -79,7 +80,7 @@ export const Weather = () => {
           currentWeatherData.map((weather: any) => {
             return (
                 loading ? <h1>Loading</h1> :
-                <CSSTransition classNames="my-node" key={weather.city_name} in={true} timeout={300}>
+                    <CSSTransition classNames="slide" appear={true} timeout={600} in={true} key={weather.city_name}>
                 <div className="currentWeather">
                   <div className="gradient">
                     <div className="country">
@@ -92,14 +93,15 @@ export const Weather = () => {
                     <div>{weather.weather.description}</div>
                   </div>
                 </div>
-            </CSSTransition>
+                      </CSSTransition>
             );
           })}
           <div className="forecast-wrapper">
             {foreCast &&
             foreCast.map((weather: any) => {
               return (
-                  <div className="forecast" key={weather.ts}>
+                  <CSSTransition classNames="leftSlide" appear={true} timeout={400} key={weather.ts}>
+                  <div className="forecast">
                     <div className="forecast-date">
                       {moment(weather.ts * 1000).format("dddd")}
                     </div>
@@ -110,6 +112,7 @@ export const Weather = () => {
                         alt="weather-condition"
                     />
                   </div>
+                  </CSSTransition>
               );
             })}
           </div>

@@ -46,6 +46,7 @@
 .forecast-wrapper{
     margin-top: 20px;
     display: flex;
+    flex-direction: row;
 }
 
 .forecast {
@@ -109,17 +110,30 @@ form {
       color:white;
   }
 
-  .my-node-enter {
+  .slide-appear {
+    animation: slideIn 600ms linear;
+  }
+
+  .leftSlide-appear {
+    opacity: 0;
+    transition: 400ms linear;
+  }
+  .leftSlide-appear-done {
+    opacity: 1;
+    transition: 400ms linear;
+  }
+
+  .leftSlide-exit {
     opacity: 0;
   }
-  .my-node-enter-active {
-    opacity: 1;
-    transition: opacity 500ms;
-  }
-  .my-node-exit {
-    opacity: 1;
-  }
-  .my-node-exit-active {
+  .leftSlide-exit-active {
     opacity: 0;
-    transition: opacity 500ms;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
   }
+
+  @keyframes slideIn {
+    from {top: -500px}
+    to {top: 0;}
+  }
+
